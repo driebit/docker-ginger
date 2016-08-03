@@ -11,7 +11,7 @@ RUN mkdir /opt \
 	&& rm -rf /opt/zotonic/.git /opt/zotonic/doc 
 
 RUN git -C /srv clone -b ${GINGER_RELEASE} https://github.com/driebit/ginger.git zotonic \
-	&& find /srv/zotonic -maxdepth 1 ! -name 'modules' ! -name 'sites' -type d -exec rm -rf {} +
+	&& find /srv/zotonic -mindepth 1 -maxdepth 1 ! -name 'modules' ! -name 'sites' -type d -exec rm -rf {} +
 
 WORKDIR /opt/zotonic
 
