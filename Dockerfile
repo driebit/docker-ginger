@@ -8,7 +8,7 @@ RUN apk add --no-cache git
 
 RUN mkdir /opt \
 	&& git -C /opt clone -b ${ZOTONIC_RELEASE} https://github.com/zotonic/zotonic.git \
-	&& rm -rf /opt/zotonic/.git
+	&& rm -rf /opt/zotonic/.git /opt/zotonic/doc 
 
 RUN git -C /srv clone -b ${GINGER_RELEASE} https://github.com/driebit/ginger.git zotonic \
 	&& find /srv/zotonic -maxdepth 1 ! -name 'modules' ! -name 'sites' -type d -exec rm -rf {} +
