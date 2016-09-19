@@ -1,4 +1,4 @@
-FROM alpine:3.4
+FROM zotonic:zotonic
 
 ENV ZOTONIC_RELEASE=0.19.1
 ENV GINGER_RELEASE=0.13.0
