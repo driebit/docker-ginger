@@ -1,5 +1,6 @@
 FROM zotonic/zotonic:0.x
 
+COPY erlang.config /etc/zotonic/erlang.config
 COPY zotonic.config /etc/zotonic/zotonic.config
 COPY docker-entrypoint-ginger.sh /
 
