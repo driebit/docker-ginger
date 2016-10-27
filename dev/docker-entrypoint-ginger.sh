@@ -3,6 +3,9 @@
 # This requires Docker to be run with --privileged
 gosu root echo 524288 > /proc/sys/fs/inotify/max_user_watches || true
 
+sed -i -e "s/\({output, {udp, \)\"localhost\", 5514}}/\1\"${LOGSTASH_HOST}\", ${LOGSTASH_PORT}}}/" \
+    /etc/zotonic/erlang.config
+
 # Making is only necessary when mounting a custom /opt/zotonic volume
 if [ "$MAKE" = true ]; then
     make

@@ -1,5 +1,8 @@
 FROM zotonic/zotonic:0.x
 
+ENV LOGSTASH_HOST 127.0.0.1
+ENV LOGSTASH_PORT 5514
+
 COPY erlang.config /etc/zotonic/erlang.config
 COPY zotonic.config /etc/zotonic/zotonic.config
 COPY docker-entrypoint-ginger.sh /
