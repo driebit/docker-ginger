@@ -7,7 +7,7 @@ COPY erlang.config /etc/zotonic/erlang.config
 COPY zotonic.config /etc/zotonic/zotonic.config
 COPY docker-entrypoint-ginger.sh /
 
-RUN apk add --no-cache ca-certificates bash curl make gcc musl-dev g++ git inotify-tools wget \
+RUN apk add --no-cache $BUILD_APKS inotify-tools \
     && DEBUG=1 make
 
 RUN chown -R zotonic /opt/zotonic/ebin
