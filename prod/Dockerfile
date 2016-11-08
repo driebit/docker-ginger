@@ -1,7 +1,7 @@
 # Replace with zotonic/zotonic:0.23.0 when that is released
 FROM zotonic/zotonic:0.x
 
-ENV GINGER_RELEASE=0.16.0
+ENV GINGER_RELEASE=master
 
 COPY etc_zotonic /etc/zotonic
 
