@@ -8,23 +8,16 @@ COPY erlang.config /etc/zotonic/erlang.config
 COPY zotonic.config /etc/zotonic/zotonic.config
 COPY docker-entrypoint-ginger.sh /
 
-RUN apk add --no-cache $BUILD_APKS inotify-tools \
-    && DEBUG=1 make
-
-RUN chown -R zotonic /opt/zotonic/ebin
-
 # Install hdt tools
-
-WORKDIR /opt
-
-RUN apk --virtual build-deps add --update g++ make python curl automake autoconf libtool zlib-dev
+RUN apk --virtual build-deps add --update g++ make python curl automake autoconf libtool zlib-dev \
+    && cd /opt \
     && curl -O http://download.drobilla.net/serd-0.28.0.tar.bz2 \
     && tar jxf serd-0.28.0.tar.bz2 \
     && rm serd-0.28.0.tar.bz2 \
     && cd serd-0.28.0 \
     && ./waf configure \
     && ./waf \
-    && ./waf install
+    && ./waf install \
     && curl -L https://github.com/rdfhdt/hdt-cpp/archive/v1.3.2.tar.gz -o hdt-cpp-1.3.2.tar.gz \
     && tar xzf hdt-cpp-1.3.2.tar.gz \
     && rm hdt-cpp-1.3.2.tar.gz \
@@ -32,8 +25,13 @@ RUN apk --virtual build-deps add --update g++ make python curl automake autoconf
     && ./autogen.sh \
     && PKG_CONFIG_PATH=/usr/local/lib/pkgconfig ./configure \
     && make -j2 \
-    && make install
+    && make install \
     && apk del build-deps
+
+RUN apk add --no-cache $BUILD_APKS inotify-tools \
+    && DEBUG=1 make
+
+RUN chown -R zotonic /opt/zotonic/ebin
 
 ENV TERM linux
 
