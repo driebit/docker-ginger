@@ -2,6 +2,7 @@
 FROM zotonic/zotonic:0.x
 
 ENV GINGER_RELEASE=master
+ENV ERLASTIC_SEARCH_JSON_MODULE jiffy
 
 COPY etc_zotonic /etc/zotonic
 
